@@ -4,3 +4,4 @@ transformers
 banana-dev
 diffusers
 safetensors
+accelerate

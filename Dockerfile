@@ -18,7 +18,7 @@ RUN pip3 install -r requirements.txt
 ADD download.py .
 RUN python3 download.py
 
-ADD hello-world .
+ADD . .
 
 EXPOSE 8000
 

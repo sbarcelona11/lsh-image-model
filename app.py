@@ -1,6 +1,6 @@
 import torch
 from potassium import Potassium, Request, Response
-from diffusers import DiffusionPipeline
+from diffusers import StableDiffusionPipeline
 from io import BytesIO
 import base64
 
@@ -11,7 +11,7 @@ app = Potassium("my_app")
 def init():
     device = 0 if torch.cuda.is_available() else -1
     model_id = "sbarcelona11/KIDS-ILLUSTRATION-LSH"
-    model = DiffusionPipeline.from_pretrained(model_id, use_safetensors=True, safety_checker=None)
+    model = StableDiffusionPipeline.from_pretrained(model_id, use_safetensors=True)
     model.to(device)
 
     context = {
@@ -30,7 +30,7 @@ def handler(context: dict, request: Request) -> Response:
         prompt=prompt,
         negative_prompt=negative_prompt,
         guidance_scale=7,
-        num_inference_steps=request.json.get("steps", 30),
+        num_inference_steps=request.json.get("steps", 50),
         width=512,
         height=512,
     ).images[0]

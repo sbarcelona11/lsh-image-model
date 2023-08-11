@@ -2,6 +2,5 @@ potassium
 torch
 transformers
 banana-dev
-auth_token
 diffusers
 safetensors

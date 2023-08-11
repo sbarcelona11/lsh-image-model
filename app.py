@@ -10,7 +10,7 @@ app = Potassium("my_app")
 def init():
     device = 0 if torch.cuda.is_available() else -1
     model_id = "sbarcelona11/KIDS-ILLUSTRATION-LSH"
-    model = DiffusionPipeline.from_pretrained(model_id, use_auth_token=auth_token)
+    model = DiffusionPipeline.from_pretrained(model_id, use_auth_token=auth_token, use_safetensors=True)
     model.to(device)
 
     context = {

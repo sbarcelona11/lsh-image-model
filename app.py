@@ -1,6 +1,6 @@
 import torch
 from potassium import Potassium, Request, Response
-from diffusers import StableDiffusionPipeline
+from diffusers import DiffusionPipeline
 from auth_token import auth_token
 
 app = Potassium("my_app")
@@ -10,7 +10,7 @@ app = Potassium("my_app")
 def init():
     device = 0 if torch.cuda.is_available() else -1
     model_id = "sbarcelona11/KIDS-ILLUSTRATION-LSH"
-    model = StableDiffusionPipeline.from_pretrained(model_id, use_auth_token=auth_token)
+    model = DiffusionPipeline.from_pretrained(model_id, use_auth_token=auth_token)
     model.to(device)
 
     context = {

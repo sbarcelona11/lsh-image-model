@@ -31,17 +31,16 @@ def handler(context: dict, request: Request) -> Response:
         negative_prompt=negative_prompt,
         guidance_scale=7,
         num_inference_steps=request.json.get("steps", 30),
-        generator=torch.Generator(device="cuda").manual_seed(request.json.get("seed")) if request.json.get("seed") else None,
         width=512,
         height=512,
     ).images[0]
 
     buffered = BytesIO()
     image.save(buffered, format="JPEG", quality=80)
-    img_str = base64.b64encode(buffered.getvalue())
+    img_str = base64.b64encode(buffered.getvalue()).decode("utf-8")
 
     return Response(
-        json = {"output": str(img_str, "utf-8")},
+        json = {"output": img_str},
         status=200
     )
 

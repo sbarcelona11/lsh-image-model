@@ -10,8 +10,6 @@ app = Potassium("my_app")
 @app.init
 def init():
     device = 0 if torch.cuda.is_available() else -1
-
-    # repo_id = "Meina/MeinaUnreal_V3"
     repo_id = "sbarcelona11/KIDS-ILLUSTRATION-LSH"
     ddpm = DPMSolverMultistepScheduler.from_pretrained(repo_id, subfolder="scheduler")
     model = DiffusionPipeline.from_pretrained(
@@ -20,8 +18,7 @@ def init():
         torch_dtype=torch.float16,
         scheduler=ddpm
     ).to("cuda")
-
-    # model = StableDiffusionPipeline.from_pretrained(model_id, use_safetensors=True)
+    # model = StableDiffusionPipeline.from_pretrained(repo_id, use_safetensors=True)
     model.to(device)
 
     context = {

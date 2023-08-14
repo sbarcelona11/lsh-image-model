@@ -7,12 +7,12 @@ from diffusers import DiffusionPipeline, StableDiffusionPipeline, DPMSolverMulti
 def download_model():
     repo_id = "sbarcelona11/KIDS-ILLUSTRATION-LSH"
     # StableDiffusionPipeline.from_pretrained(model_id, use_safetensors=True, safety_checker=None)
-    ddpm = DPMSolverMultistepScheduler.from_pretrained(repo_id, subfolder="scheduler")
+    # ddpm = DPMSolverMultistepScheduler.from_pretrained(repo_id, subfolder="scheduler")
     DiffusionPipeline.from_pretrained(
         repo_id,
         use_safetensors=True,
         torch_dtype=torch.float16,
-        scheduler=ddpm
+        # scheduler=ddpm
     ).to("cuda")
     print("Model downloaded")
 
